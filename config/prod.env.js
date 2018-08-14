@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 module.exports = {
     NODE_ENV: '"production"',
-    ROOT_API: '"https://berney.tech/api"',
-}
+    ROOT_API: '"https://api.berney.tech/api"',
+};

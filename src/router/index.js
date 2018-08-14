@@ -5,6 +5,7 @@ import About from '@/components/About/About';
 import Signup from '@/components/Signup/Signup';
 import Login from '@/components/Login/Login';
 import Logout from '@/components/Logout/Logout';
+import NotFound from '@/components/NotFound/NotFound';
 
 Vue.use(Router);
 
@@ -34,6 +35,10 @@ export default new Router({
             path: '/logout',
             name: 'logout',
             component: Logout,
+        },
+        {
+            path: '*',
+            component: NotFound,
         },
     ],
     mode: 'history',

@@ -51,16 +51,31 @@ export default {
             const lastName = fields.lastName.value;
             const password = fields.password.value;
             const confirmPassword = fields.confirmPassword.value;
-            this.$http.post(this.$data.ROOT_API + '/auth/signup', {
-                email,
-                firstName,
-                lastName,
-                password,
-                confirmPassword,
+            fetch(this.$data.ROOT_API + '/auth/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    firstName,
+                    lastName,
+                    password,
+                    confirmPassword,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+            }).then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.json().then((response) => {
+                        throw response.errors;
+                    });
+                }
             }).then((response) => {
                 console.log(response);
-            }).catch((response) => {
-                this.$data.errors = response.body.errors;
+            }).catch((errors) => {
+                this.$data.errors = errors;
             });
         },
     },

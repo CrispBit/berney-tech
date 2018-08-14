@@ -45,10 +45,18 @@ export default {
                 },
                 credentials: 'include',
             }).then((response) => {
-                return response.json();
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.json().then((errors) => {
+                        throw errors;
+                    });
+                }
             }).then((response) => {
                 this.$store.dispatch('registerUser');
                 this.$router.push('/');
+            }).catch((errors) => {
+                this.$data.errors = errors;
             });
         },
     },
