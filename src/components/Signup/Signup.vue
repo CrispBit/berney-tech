@@ -73,7 +73,8 @@ export default {
                     });
                 }
             }).then((response) => {
-                console.log(response);
+                this.$store.dispatch('registerUser');
+                this.$router.push('/');
             }).catch((errors) => {
                 this.$data.errors = errors;
             });
