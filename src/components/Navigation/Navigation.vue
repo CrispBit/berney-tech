@@ -1,20 +1,17 @@
 <template>
-<div>
     <div>
-    <nav>
-        <router-link to="/">Home</router-link>
-        <router-link to="/about">About</router-link>
-        <div v-if="loggedIn" style="float: right">
-            <span>{{ user.firstName }}</span>
-            <input type="button" value="logout" v-on:click="logout()" />
-        </div>
-        <div v-else style="float: right">
-            <router-link to="/login">Sign In</router-link>
-            <router-link to="/signup">Sign Up</router-link>
-        </div>
-    </nav>
-</div>
-</div>
+        <nav>
+            <router-link to="/">Berney Computers</router-link>
+            <div v-if="loggedIn" style="float: right">
+                <span>{{ user.firstName }}</span>
+                <a href="#" v-on:click="logout()">Logout</a>
+            </div>
+            <div v-else style="float: right">
+                <router-link to="/login">Sign In</router-link>
+                <router-link to="/signup">Sign Up</router-link>
+            </div>
+        </nav>
+    </div>
 </template>
 
 <script>
@@ -48,3 +45,15 @@ export default {
     },
 };
 </script>
+
+<style>
+    nav {
+        padding: 10px;
+        background-color: black;
+        color: white;
+    }
+    nav a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
