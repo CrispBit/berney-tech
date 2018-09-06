@@ -12,6 +12,7 @@ const emptyUser = {
     email: null,
     firstName: null,
     lastName: null,
+    subscription: null,
 };
 
 function registerUser ({ commit }) {

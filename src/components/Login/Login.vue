@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="page">
         <h1>Login</h1>
         <form v-on:submit.prevent="handleLogin">
             <div class="form-item">

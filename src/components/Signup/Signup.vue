@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="page">
         <h1>Signup</h1>
-        <form v-on:submit.prevent="handleSignup">
+        <form v-if="!done" v-on:submit.prevent="handleSignup">
             <div class="form-item">
                 <label>Email:</label>
                 <input type="text" name="email" />
@@ -26,9 +26,15 @@
                 <input type="submit" value="Sign Up" />
             </div>
         </form>
+        <div v-else>
+            <h2>You have successfully registered. Consider <a href="#">adding a plan</a></h2>
+        </div>
         <ul id="error-list">
             <li v-for="error in errors" v-bind:key="error.param">
                 {{error.msg}}
+            </li>
+            <li v-if="specialErrors.userExists">
+                User with email exists. If you have forgotten your password, please <router-link to="/contact">contact us.</router-link>
             </li>
         </ul>
     </div>
@@ -41,10 +47,15 @@ export default {
         return {
             ROOT_API: process.env.ROOT_API,
             errors: '',
+            done: false,
+            specialErrors: {},
         };
     },
     methods: {
         handleSignup (e) {
+            this.errors = {};
+            this.specialErrors = {};
+
             const fields = e.target.elements;
             const email = fields.email.value;
             const firstName = fields.firstName.value;
@@ -69,14 +80,28 @@ export default {
                     return response.json();
                 } else {
                     return response.json().then((response) => {
-                        throw response.errors;
+                        throw response;
                     });
                 }
             }).then((response) => {
                 this.$store.dispatch('registerUser');
-                this.$router.push('/');
-            }).catch((errors) => {
-                this.$data.errors = errors;
+                this.done = true;
+            }).catch((response) => {
+                if ('errors' in response) {
+                    this.$data.errors = response.errors;
+                }
+                if ('specialErrors' in response) {
+                    let specialErrors = {};
+                    for (const err of response.specialErrors) {
+                        console.log(err);
+                        switch (err.type) {
+                        case 'user_exists':
+                            specialErrors.userExists = true;
+                            break;
+                        }
+                    }
+                    this.specialErrors = specialErrors;
+                }
             });
         },
     },
