@@ -11,10 +11,10 @@
             </div>
             <div class="choice-block">
                 <div class="flex-row">
-                    <router-link class="fix-block" to="#">
+                    <router-link class="fix-block" to="/tickets/new">
                         <h1>Create Help Ticket</h1>
                     </router-link>
-                    <router-link class="fix-block" to="#">
+                    <router-link class="fix-block" to="/tickets">
                         <h1>View Help Tickets</h1>
                     </router-link>
                 </div>
@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .choice-block {
     flex-direction: column;
     display: flex;

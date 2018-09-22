@@ -8,6 +8,9 @@ import Logout from '@/components/Logout/Logout';
 import NotFound from '@/components/NotFound/NotFound';
 import Admin from '@/components/Admin/Admin';
 import Users from '@/components/Admin/Users';
+import Tickets from '@/components/Tickets/Tickets';
+import NewTicket from '@/components/Tickets/New';
+import ViewTicket from '@/components/Tickets/View';
 
 Vue.use(Router);
 
@@ -51,6 +54,21 @@ export default new Router({
             path: '/admin/users',
             name: 'users',
             component: Users,
+        },
+        {
+            path: '/tickets',
+            name: 'tickets',
+            component: Tickets,
+        },
+        {
+            path: '/tickets/new',
+            name: 'new-ticket',
+            component: NewTicket,
+        },
+        {
+            path: '/tickets/view/:ticketId',
+            name: 'view-ticket',
+            component: ViewTicket,
         },
     ],
     mode: 'history',
