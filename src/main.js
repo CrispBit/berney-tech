@@ -13,6 +13,11 @@ const emptyUser = {
     firstName: null,
     lastName: null,
     subscription: null,
+    accessLevel: null,
+};
+
+const emptyAdminData = {
+    users: null,
 };
 
 function registerUser ({ commit }) {
@@ -36,14 +41,30 @@ function setUserInfo (state, user) {
     }
 }
 
+function registerUsers ({ commit }) {
+    fetch(process.env.ROOT_API + '/admin/getUsers', { credentials: 'include' })
+        .then((res) => {
+            return res.json();
+        }).then((users) => {
+            commit('setUsersInfo', users);
+        }).catch((err) => {
+            console.error(err);
+        });
+}
+
+function setUsersInfo (state, users) {
+    state.adminData.users = users;
+}
+
 const store = new Vuex.Store({
     strict: true,
     state: {
         loggedIn: false,
         user: emptyUser,
+        adminData: emptyAdminData,
     },
-    mutations: { setUserInfo },
-    actions: { registerUser },
+    mutations: { setUserInfo, setUsersInfo },
+    actions: { registerUser, registerUsers },
 });
 
 /* eslint-disable no-new */

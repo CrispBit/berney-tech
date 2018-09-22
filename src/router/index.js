@@ -6,6 +6,8 @@ import Signup from '@/components/Signup/Signup';
 import Login from '@/components/Login/Login';
 import Logout from '@/components/Logout/Logout';
 import NotFound from '@/components/NotFound/NotFound';
+import Admin from '@/components/Admin/Admin';
+import Users from '@/components/Admin/Users';
 
 Vue.use(Router);
 
@@ -39,6 +41,16 @@ export default new Router({
         {
             path: '*',
             component: NotFound,
+        },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: Admin,
+        },
+        {
+            path: '/admin/users',
+            name: 'users',
+            component: Users,
         },
     ],
     mode: 'history',
