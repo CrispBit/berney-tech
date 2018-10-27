@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
     .form-item {
         margin: 5px;
     }
