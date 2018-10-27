@@ -14,6 +14,7 @@ const emptyUser = {
     lastName: null,
     subscription: null,
     accessLevel: null,
+    tickets: null,
 };
 
 const emptyAdminData = {
